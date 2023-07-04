@@ -1,5 +1,6 @@
 import requests
 
+
 def GetAction():
     while True:
         action = input("Do you want to buy or sell currency? For buy press 'b', for sell press 's': ").strip().lower()
@@ -47,15 +48,20 @@ def ChangeJson():
         rate = myjson["rates"][0]["ask"]
         return rate, action
 
-def CountRate():
+def CountRate(results, amount):
+    money = round(results[0] * amount, 2)
+    return money
+
+def Main():
     results = ChangeJson()
     amount = GetAmount()
-    money = round(results[0] * amount, 2)
+    money = CountRate(results, amount)
     if results[1] == 'b':
         print(f'You will pay {money} PLN')
     if results[1] == 's':
         print(f'You will receive {money} PLN')
 
-CountRate()
+if __name__ == "__main__":
+    Main()
 
 
