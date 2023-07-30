@@ -20,7 +20,7 @@ def GetCurrency():
             print('Something went wrong! Have you entered the currency in ISO standard?')
             continue
         else:
-            return response.json()
+            return response.json()["rates"][0]["bid"], response.json()["rates"][0]["ask"]
 
 
 def GetAmount():
@@ -41,11 +41,11 @@ def ChangeJson():
     action = GetAction()
     if action == "s":
         myjson = GetCurrency()
-        rate = myjson["rates"][0]["bid"]
+        rate = myjson[0]
         return rate, action
     if action == "b":
         myjson = GetCurrency()
-        rate = myjson["rates"][0]["ask"]
+        rate = myjson[1]
         return rate, action
 
 def CountRate(results, amount):
@@ -63,5 +63,3 @@ def Main():
 
 if __name__ == "__main__":
     Main()
-
-
